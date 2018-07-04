@@ -9,6 +9,8 @@ package pos.java.pizzaria.model;
  *
  * @author leonam
  */
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -20,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -44,6 +47,15 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+
+    @ManyToOne
+    @JoinColumn(name = "entregador_id")
+    private Motoboy entregador;
+
+    @OneToOne
+    @JoinColumn(name = "atendente_id")
+    private Atendente atendente;
+
     private boolean entrega;
     private double desconto;
     private double taxa_entrega;
@@ -57,10 +69,12 @@ public class Pedido {
 
     }
 
-    public Pedido(Cliente cliente, Endereco endereco, boolean entrega, double desconto, double taxa_entrega, double valor, double troco, java.sql.Date data, java.sql.Timestamp hora, String status) {
-
+    public Pedido(long id, Cliente cliente, Endereco endereco, Motoboy entregador, Atendente atendente, boolean entrega, double desconto, double taxa_entrega, double valor, double troco, Date data, Timestamp hora, String status) {
+        this.id = id;
         this.cliente = cliente;
         this.endereco = endereco;
+        this.entregador = entregador;
+        this.atendente = atendente;
         this.entrega = entrega;
         this.desconto = desconto;
         this.taxa_entrega = taxa_entrega;
@@ -167,4 +181,21 @@ public class Pedido {
         this.status = status;
     }
 
+    public Motoboy getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(Motoboy entregador) {
+        this.entregador = entregador;
+    }
+
+    public Atendente getAtendente() {
+        return atendente;
+    }
+
+    public void setAtendente(Atendente atendente) {
+        this.atendente = atendente;
+    }
+
+    
 }
