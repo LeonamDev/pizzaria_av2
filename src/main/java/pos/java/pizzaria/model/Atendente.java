@@ -5,6 +5,7 @@
  */
 package pos.java.pizzaria.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,7 +16,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "atendente")
-public class Atendente extends Funcionario {
+public class Atendente extends Funcionario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int ramal;
 
@@ -26,10 +29,9 @@ public class Atendente extends Funcionario {
 
     }
 
-    public Atendente(int ramal, Pedido pedido, int registro, String login, String nome) {
+    public Atendente(int ramal, int registro, String login, String nome) {
         super(registro, login, nome);
         this.ramal = ramal;
-        this.pedido = pedido;
     }
 
     public int getRamal() {

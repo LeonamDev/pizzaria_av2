@@ -6,12 +6,14 @@
 package pos.java.pizzaria.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import pos.java.pizzaria.model.Gerente;
 
 /**
  *
  * @author leonam
  */
+@Repository
 public interface GerenteRepository extends JpaRepository<Gerente, Long>{
     
 }

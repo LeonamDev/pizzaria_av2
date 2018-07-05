@@ -5,6 +5,7 @@
  */
 package pos.java.pizzaria.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,11 +15,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "funcionario")
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int registro;
     private String login;
-    private char[] senha = new char[10];
+    private char[] senha = new char[8];
 
     public Funcionario() {
 
@@ -53,7 +56,5 @@ public class Funcionario extends Pessoa {
     public void setSenha(char[] senha) {
         this.senha = senha;
     }
-    
-    
 
 }

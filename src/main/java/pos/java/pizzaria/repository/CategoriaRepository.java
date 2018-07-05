@@ -6,12 +6,14 @@
 package pos.java.pizzaria.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import pos.java.pizzaria.model.Categoria;
 
 /**
  *
  * @author leonam
  */
+@Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
     
 }

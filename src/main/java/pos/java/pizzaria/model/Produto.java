@@ -5,6 +5,7 @@
  */
 package pos.java.pizzaria.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +28,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Produto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

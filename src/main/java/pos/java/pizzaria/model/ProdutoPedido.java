@@ -24,6 +24,8 @@ import javax.persistence.Table;
 @Cacheable(false)
 public class ProdutoPedido implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @ManyToOne
     @JoinColumn(name = "produto_id")

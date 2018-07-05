@@ -9,6 +9,7 @@ package pos.java.pizzaria.model;
  *
  * @author leonam
  */
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -31,7 +32,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pedido")
-public class Pedido {
+public class Pedido implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +63,7 @@ public class Pedido {
     private double desconto;
     private double taxa_entrega;
     private double valor;
+    private int forma_pagamento;
     private double troco;
     private java.sql.Date data;
     private java.sql.Timestamp hora;
@@ -69,8 +73,8 @@ public class Pedido {
 
     }
 
-    public Pedido(long id, Cliente cliente, Endereco endereco, Motoboy entregador, Atendente atendente, boolean entrega, double desconto, double taxa_entrega, double valor, double troco, Date data, Timestamp hora, String status) {
-        this.id = id;
+    public Pedido(Cliente cliente, Endereco endereco, Motoboy entregador, Atendente atendente, boolean entrega, double desconto, double taxa_entrega, double valor, int forma_pagamento, double troco, Date data, Timestamp hora, String status) {
+
         this.cliente = cliente;
         this.endereco = endereco;
         this.entregador = entregador;
@@ -79,6 +83,7 @@ public class Pedido {
         this.desconto = desconto;
         this.taxa_entrega = taxa_entrega;
         this.valor = valor;
+        this.forma_pagamento = forma_pagamento;
         this.troco = troco;
         this.data = data;
         this.hora = hora;
@@ -149,6 +154,14 @@ public class Pedido {
         this.valor = valor;
     }
 
+    public int getForma_pagamento() {
+        return forma_pagamento;
+    }
+
+    public void setForma_pagamento(int forma_pagamento) {
+        this.forma_pagamento = forma_pagamento;
+    }
+
     public double getTroco() {
         return troco;
     }
@@ -197,5 +210,4 @@ public class Pedido {
         this.atendente = atendente;
     }
 
-    
 }

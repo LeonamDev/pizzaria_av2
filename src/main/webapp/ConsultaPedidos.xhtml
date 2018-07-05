@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewAction action="#{consultaPedidosBean.consultar}" />
+    </f:metadata>
+    <ui:define name="titulo">Consulta de Pedidos</ui:define>
+    <ui:define name="corpo">
+        <h1>Consulta de pedidos</h1>
+        <h:form id="frm">
+            <h:dataTable value="#{consultaPedidosBean.pedidos}"
+                         var="pedido" border="1" cellspacing="0"
+                         cellpadding="2">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cliente"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.cliente.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Atendente"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.atendente.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Entregador"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.entregador.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.data}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Hora"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.hora}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Forma de Pagamento"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.forma_pagamento}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.status}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Taxa de Entrega"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.taxa_entrega}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Troco"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.troco}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Valor"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.valor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Endereco Entrega"/>
+                    </f:facet>
+                    <h:outputText value="#{pedido.endereco.rua}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
