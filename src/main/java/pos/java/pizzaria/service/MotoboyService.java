@@ -5,8 +5,12 @@
  */
 package pos.java.pizzaria.service;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.repository.MotoboyRepository;
 
 /**
@@ -14,9 +18,29 @@ import pos.java.pizzaria.repository.MotoboyRepository;
  * @author leonam
  */
 @Service
-public class MotoboyService {
-    
+public class MotoboyService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Autowired
     private MotoboyRepository motoboyRepository;
-    
+
+    public Optional<Motoboy> findById(Long id) {
+
+        return motoboyRepository.findById(id);
+
+    }
+
+    public List<Motoboy> findAll() {
+
+        return motoboyRepository.findAll();
+
+    }
+
+    public void save(Motoboy motoboy) {
+
+        motoboyRepository.save(motoboy);
+
+    }
+
 }

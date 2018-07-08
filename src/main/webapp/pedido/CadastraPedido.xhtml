@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewAction action="#{cadastraPedidoBean.prepararCadastro}" />
+    </f:metadata>
+    <ui:define name="titulo">Cadastro de Pedido</ui:define>
+    <ui:define name="corpo">
+        <h1>Cadastro de pedido</h1>
+        <h:form id="frm">
+            <h:messages showDetail="false" showSummary="true" />
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Cliente" />
+                <h:selectOneMenu
+                    value="#{cadastraPedidoBean.pedido.cliente}"
+                    label="Cliente">
+                    <f:selectItem
+                        itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems
+                        value="#{cadastraPedidoBean.todosClientes}"
+                        var="cliente" itemValue="#{cliente}"
+                        itemLabel="#{cliente.nome}" />
+                </h:selectOneMenu>
+                <h:outputLabel value="Atendente" />
+                <h:selectOneMenu
+                    value="#{cadastraPedidoBean.pedido.atendente}"
+                    label="Atendente">
+                    <f:selectItem
+                        itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems
+                        value="#{cadastraPedidoBean.todosAtendentes}"
+                        var="cliente" itemValue="#{atendente}"
+                        itemLabel="#{atendente.nome}" />
+                </h:selectOneMenu>
+                <h:outputLabel value="Entregador" />
+                <h:selectOneMenu
+                    value="#{cadastraPedidoBean.pedido.entregador}"
+                    label="Entregador">
+                    <f:selectItem
+                        itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems
+                        value="#{cadastraPedidoBean.todosMotoboys}"
+                        var="motoboy" itemValue="#{motoboy}"
+                        itemLabel="#{motoboy.nome}" />
+                </h:selectOneMenu>
+                  <h:outputLabel value="Status" />
+                <h:selectOneRadio
+                    value="#{cadastraPedidoBean.pedido.status}"
+                    label="Status do pedido">
+                    <f:selectItems
+                        value="#{cadastraPedidoBean.tiposStatus}"
+                        var="tipoStatus"
+                        itemValue="#{tipoStatus}" />
+                </h:selectOneRadio>
+                 <h:outputLabel value="Produtos" />
+                  <h:selectManyCheckbox value="#{cadastraPedidoBean.pedido.produtoPedidos}">
+                      <f:selectItems
+                        value="#{cadastraPedidoBean.todosProdutos}"
+                        var="produto"
+                        itemValue="#{produto}" 
+                        itemLabel="#{produto.nome}"/>
+                  </h:selectManyCheckbox>
+                <h:outputLabel value="Valor" />
+                    <h:inputText size="12"
+                                 value="#{cadastraPedidoBean.pedido.valor}"
+                                 label="Valor">
+                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                         minFractionDigits="2" />
+                    </h:inputText>
+                <h:outputLabel value="Desconto" />
+                        <h:inputText size="12"
+                                     value="#{cadastraPedidoBean.pedido.desconto}"
+                                     label="Valor">
+                            <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                             minFractionDigits="2" />
+                        </h:inputText>
+                <h:outputLabel value="Taxa de Entrega" />
+                    <h:inputText size="12"
+                                 value="#{cadastraPedidoBean.pedido.taxa_entrega}"
+                                 label="Valor">
+                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                         minFractionDigits="2" />
+                    </h:inputText>                   
+                <h:outputLabel value="Troco" />
+                    <h:inputText size="12"
+                                 value="#{cadastraPedidoBean.pedido.troco}"
+                                 label="Valor">
+                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                         minFractionDigits="2" />
+                    </h:inputText>
+
+                <h:commandButton value="Salvar"
+                                 action="#{cadastraPedidoBean.salvar}" />
+            </h:panelGrid>
+        </h:form>   
+    </ui:define>
+</ui:composition>

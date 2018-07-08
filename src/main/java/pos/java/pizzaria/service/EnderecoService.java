@@ -5,8 +5,12 @@
  */
 package pos.java.pizzaria.service;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pos.java.pizzaria.model.Endereco;
 import pos.java.pizzaria.repository.EnderecoRepository;
 
 /**
@@ -14,9 +18,23 @@ import pos.java.pizzaria.repository.EnderecoRepository;
  * @author leonam
  */
 @Service
-public class EnderecoService {
-    
+public class EnderecoService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Autowired
     private EnderecoRepository enderecoRepository;
-    
+
+    public Optional<Endereco> findById(Long id) {
+
+        return enderecoRepository.findById(id);
+
+    }
+
+    public List<Endereco> findAll() {
+
+        return enderecoRepository.findAll();
+
+    }
+
 }

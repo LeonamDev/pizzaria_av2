@@ -5,8 +5,12 @@
  */
 package pos.java.pizzaria.service;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pos.java.pizzaria.model.Ingrediente;
 import pos.java.pizzaria.repository.IngredienteRepository;
 
 /**
@@ -14,9 +18,23 @@ import pos.java.pizzaria.repository.IngredienteRepository;
  * @author leonam
  */
 @Service
-public class IngredienteService {
-    
+public class IngredienteService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Autowired
     private IngredienteRepository ingredienteRepository;
-    
+
+    public Optional<Ingrediente> findById(Long id) {
+
+        return ingredienteRepository.findById(id);
+
+    }
+
+    public List<Ingrediente> findAll() {
+
+        return ingredienteRepository.findAll();
+
+    }
+
 }

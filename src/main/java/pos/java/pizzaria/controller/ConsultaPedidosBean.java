@@ -32,7 +32,7 @@ public class ConsultaPedidosBean implements Serializable {
     private List<Pedido> pedidos = new ArrayList();
 
     public void consultar() {
-        this.pedidos = pedidoService.todos();
+        this.pedidos = pedidoService.findAll();
 
     }
 
