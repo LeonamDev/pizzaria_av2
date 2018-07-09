@@ -16,6 +16,8 @@
 package pos.java.pizzaria.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,13 +31,32 @@ import pos.java.pizzaria.service.MotoboyService;
  * @author leonam
  */
 @ManagedBean
-@ViewScoped
-public class CadastraMotoboyBean implements Serializable {
+public class MotoboyBean implements Serializable {
 
     Motoboy motoboy = new Motoboy();
+    List<Motoboy> todosMotoboys = new ArrayList();
 
     @Autowired
     MotoboyService motoboyService;
+    
+
+    public void consultar() {
+        this.todosMotoboys = motoboyService.findAll();
+    }
+
+    public void remover(Long id) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        motoboyService.remove(id);
+        consultar();
+        context.addMessage(null, new FacesMessage(
+                "Motoboy removido com sucesso!"));
+    }
+
+    public String editar(Motoboy motoboy) {
+
+        this.motoboy = motoboy;
+        return "CadastraMotoboy.xhtml";
+    }
 
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -52,6 +73,10 @@ public class CadastraMotoboyBean implements Serializable {
 
     public void setMotoboy(Motoboy motoboy) {
         this.motoboy = motoboy;
+    }
+
+    public List<Motoboy> getTodosMotoboys() {
+        return todosMotoboys;
     }
 
 }

@@ -43,4 +43,9 @@ public class MotoboyService implements Serializable {
 
     }
 
+    public void remove(Long id) {
+
+        motoboyRepository.deleteById(id);
+    }
+
 }

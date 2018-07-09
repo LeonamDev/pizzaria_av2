@@ -20,16 +20,16 @@ and open the template in the editor.
             <h:panelGrid columns="2">  
                  <h:outputLabel value="Nome" />
                 <h:inputText size="12"
-                             value="#{cadastraMotoboyBean.motoboy.nome}"
+                             value="#{motoboyBean.motoboy.nome}"
                              label="Nome" />
                
                 <h:outputLabel value="Placa" />
                 <h:inputText size="12"
-                             value="#{cadastraMotoboyBean.motoboy.moto_placa}"
+                             value="#{motoboyBean.motoboy.moto_placa}"
                              label="Codigo" />
 
                 <h:commandButton value="Salvar"
-                                 action="#{cadastraMotoboyBean.salvar}" />
+                                 action="#{motoboyBean.salvar}" />
             </h:panelGrid>
         </h:form>   
     </ui:define>
