@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pos.java.pizzaria.model.Ingrediente;
 import pos.java.pizzaria.model.Produto;
 import pos.java.pizzaria.repository.ProdutoRepository;
 
@@ -37,6 +38,10 @@ public class ProdutoService implements Serializable {
 
     public void save(Produto produto) {
         produtoRepository.save(produto);
+    }
+
+    public void remove(Long id) {
+        produtoRepository.deleteById(id);
     }
 
 }

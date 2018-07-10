@@ -6,7 +6,10 @@
 package pos.java.pizzaria.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,8 +25,8 @@ public class Atendente extends Funcionario implements Serializable {
 
     private int ramal;
 
-    @OneToOne(mappedBy = "atendente")
-    private Pedido pedido;
+    @OneToMany(mappedBy = "atendente")
+     private List<Pedido> pedidos = new ArrayList<>();
 
     public Atendente() {
 
@@ -42,12 +45,13 @@ public class Atendente extends Funcionario implements Serializable {
         this.ramal = ramal;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
+  
 }

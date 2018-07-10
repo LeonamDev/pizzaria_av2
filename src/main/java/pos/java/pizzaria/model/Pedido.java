@@ -55,7 +55,7 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "entregador_id")
     private Motoboy entregador;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "atendente_id")
     private Atendente atendente;
 

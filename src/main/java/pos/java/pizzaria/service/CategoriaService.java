@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pos.java.pizzaria.model.Atendente;
 import pos.java.pizzaria.model.Categoria;
 import pos.java.pizzaria.repository.CategoriaRepository;
 
@@ -35,6 +36,15 @@ public class CategoriaService implements Serializable {
 
         return categoriaRepository.findAll();
 
+    }
+
+    public void save(Categoria categoria) {
+        categoriaRepository.save(categoria);
+
+    }
+
+    public void remove(Long id) {
+        categoriaRepository.deleteById(id);
     }
 
 }
