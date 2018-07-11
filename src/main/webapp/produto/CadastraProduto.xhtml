@@ -12,7 +12,7 @@ and open the template in the editor.
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:metadata>
-        <f:viewAction action="#{cadastraProdutoBean.prepararCadastro}" />
+        <f:viewAction action="#{produtoBean.prepararCadastro}" />
     </f:metadata>
     <ui:define name="titulo">Cadastro de Produto</ui:define>
     <ui:define name="corpo">
@@ -22,44 +22,44 @@ and open the template in the editor.
             <h:panelGrid columns="2">
                 <h:outputLabel value="Categoria" />
                 <h:selectOneMenu
-                    value="#{cadastraProdutoBean.produto.categoria}"
+                    value="#{produtoBean.produto.categoria}" converter="#{categoriaConverter}"
                     label="Categoria">
                     <f:selectItem
                         itemLabel="Selecione" noSelectionOption="true" />
                     <f:selectItems
-                        value="#{cadastraProdutoBean.todasCategorias}"
+                        value="#{produtoBean.todasCategorias}"
                         var="categoria" itemValue="#{categoria}"
                         itemLabel="#{categoria.nome}" />
                 </h:selectOneMenu>
                 <h:outputLabel value="Ingredientes" />
-                <h:selectManyCheckbox value="#{cadastraProdutoBean.produto.ingredientes}">
+                <h:selectManyCheckbox value="#{produtoBean.produto.ingredientes}" converter="#{ingredienteConverter}">
                     <f:selectItems
-                        value="#{cadastraProdutoBean.todosIngredientes}"
+                        value="#{produtoBean.todosIngredientes}"
                         var="ingrediente"
                         itemValue="#{ingrediente}" 
                         itemLabel="#{ingrediente.nome}"/>
                 </h:selectManyCheckbox>
                 <h:outputLabel value="Código" />
                 <h:inputText size="12"
-                             value="#{cadastraProdutoBean.produto.codigo}"
+                             value="#{produtoBean.produto.codigo}"
                              label="Valor">
                     <f:convertNumber />
                 </h:inputText>
                 <h:outputLabel value="Nome" />
                 <h:inputText size="12"
-                             value="#{cadastraProdutoBean.produto.nome}"
+                             value="#{produtoBean.produto.nome}"
                              label="Nome" />
 
                 <h:outputLabel value="Preco" />
                 <h:inputText size="12"
-                             value="#{cadastraProdutoBean.produto.preco}"
+                             value="#{produtoBean.produto.preco}"
                              label="Valor">
                     <f:convertNumber locale="pt_BR" maxFractionDigits="2"
                                      minFractionDigits="2" />
                 </h:inputText>
 
                 <h:commandButton value="Salvar"
-                                 action="#{cadastraProdutoBean.salvar}" />
+                                 action="#{produtoBean.salvar}" />
             </h:panelGrid>
         </h:form>   
     </ui:define>

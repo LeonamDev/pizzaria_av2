@@ -18,11 +18,25 @@ and open the template in the editor.
         <h:form id="frm">
             <h:messages showDetail="false" showSummary="true" />
             <h:panelGrid columns="2">  
-                 <h:outputLabel value="Nome" />
+                <h:outputLabel value="Nome" />
                 <h:inputText size="12"
                              value="#{motoboyBean.motoboy.nome}"
                              label="Nome" />
-               
+                <h:outputLabel value="Registro" />
+                <h:inputText size="12"
+                             value="#{motoboyBean.motoboy.registro}"
+                             label="Registro" />
+                <h:outputLabel value="Login" />
+                <h:inputText size="12"
+                             value="#{motoboyBean.motoboy.login}"
+                             label="Login" />
+                <h:outputLabel value="Senha" />
+                <h:inputText size="12"
+                             value="#{motoboyBean.motoboy.senha}"
+                             label="Senha" >
+                    <f:converter converterId="PasswordConverter" />
+                </h:inputText>
+
                 <h:outputLabel value="Placa" />
                 <h:inputText size="12"
                              value="#{motoboyBean.motoboy.moto_placa}"

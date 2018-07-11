@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewAction action="#{enderecoBean.consultar}" />
+    </f:metadata>
+    <ui:define name="titulo">Consulta de enderecos</ui:define>
+    <ui:define name="corpo">
+        <h1>Consulta de enderecos</h1>
+        <h:messages showDetail="false" showSummary="true" />
+        <h:form id="frm">
+            <h:dataTable value="#{enderecoBean.todosEnderecos}"
+                         var="endereco" border="1" cellspacing="0"
+                         cellpadding="2">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Endereco"/>
+                    </f:facet>
+                    <h:outputText value="#{endereco.rua}- #{endereco.numero} - #{endereco.referencia}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cliente"/>
+                    </f:facet>
+                    <h:outputText value="#{endereco.cliente.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Ações"/>
+                    </f:facet>
+                    <h:commandButton value="Editar"
+                                     action="#{enderecoBean.editar(endereco)}" />
+                    <h:commandButton value="Remover"
+                                     action="#{enderecoBean.remover(endereco.id)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

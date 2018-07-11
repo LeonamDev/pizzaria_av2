@@ -6,6 +6,7 @@
 package pos.java.pizzaria.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -80,5 +81,37 @@ public class ProdutoPedido implements Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.produto);
+        hash = 67 * hash + Objects.hashCode(this.pedido);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ProdutoPedido other = (ProdutoPedido) obj;
+        if (!Objects.equals(this.produto, other.produto)) {
+            return false;
+        }
+        if (!Objects.equals(this.pedido, other.pedido)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
 
 }

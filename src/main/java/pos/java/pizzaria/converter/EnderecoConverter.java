@@ -22,27 +22,28 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pos.java.pizzaria.model.Endereco;
 import pos.java.pizzaria.model.Ingrediente;
-import pos.java.pizzaria.service.IngredienteService;
+import pos.java.pizzaria.service.EnderecoService;
 
 /**
  *
  * @author leonam
  */
 @Component
-public class IngredienteConverter implements Converter {
+public class EnderecoConverter implements Converter {
 
     @Autowired
-    IngredienteService ingredienteService;
+    EnderecoService enderecoService;
 
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
-        Optional<Ingrediente> retorno = null;
+        Optional<Endereco> retorno = null;
 
         if (value != null && !"".equals(value)) {
 
-            retorno = ingredienteService.findById(new Long(value));
+            retorno = enderecoService.findById(new Long(value));
 
         }
         return retorno.orElse(null);
@@ -52,7 +53,7 @@ public class IngredienteConverter implements Converter {
     public String getAsString(FacesContext context,
             UIComponent component, Object value) {
         if (value != null) {
-            return Long.toString(((Ingrediente) value).getId());
+            return Long.toString(((Endereco) value).getId());
         }
         return null;
     }

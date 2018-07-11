@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pos.java.pizzaria.model.Produto;
 import pos.java.pizzaria.service.ProdutoService;
 
@@ -28,7 +29,7 @@ import pos.java.pizzaria.service.ProdutoService;
  *
  * @author leonam
  */
-@FacesConverter(forClass = Produto.class)
+@Component
 public class ProdutoConverter implements Converter {
 
     @Autowired
@@ -44,7 +45,7 @@ public class ProdutoConverter implements Converter {
             retorno = produtoService.findById(new Long(value));
 
         }
-        return retorno;
+        return retorno.orElse(null);
     }
 
     @Override

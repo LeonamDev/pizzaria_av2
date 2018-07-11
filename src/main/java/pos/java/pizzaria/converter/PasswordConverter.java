@@ -15,46 +15,39 @@
  */
 package pos.java.pizzaria.converter;
 
-import java.util.Optional;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import pos.java.pizzaria.model.Ingrediente;
-import pos.java.pizzaria.service.IngredienteService;
 
 /**
  *
  * @author leonam
  */
-@Component
-public class IngredienteConverter implements Converter {
-
-    @Autowired
-    IngredienteService ingredienteService;
+@FacesConverter("PasswordConverter")
+public class PasswordConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
-        Optional<Ingrediente> retorno = null;
-
+        char[] senha = {};
         if (value != null && !"".equals(value)) {
 
-            retorno = ingredienteService.findById(new Long(value));
-
+            senha = value.toCharArray();
         }
-        return retorno.orElse(null);
+
+        return senha;
     }
 
     @Override
     public String getAsString(FacesContext context,
             UIComponent component, Object value) {
+        String senha = "";
         if (value != null) {
-            return Long.toString(((Ingrediente) value).getId());
+            senha = value.toString();
         }
-        return null;
+
+        return senha;
     }
 
 }

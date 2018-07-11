@@ -22,66 +22,65 @@ import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import pos.java.pizzaria.model.Atendente;
-import pos.java.pizzaria.model.Categoria;
-import pos.java.pizzaria.service.CategoriaService;
+import pos.java.pizzaria.model.Ingrediente;
+import pos.java.pizzaria.service.IngredienteService;
 
 /**
  *
  * @author leonam
  */
 @ManagedBean
-public class CategoriaBean implements Serializable {
+public class IngredienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    Categoria categoria = new Categoria();
-    List<Categoria> todasCategorias = new ArrayList<>();
+    Ingrediente ingrediente = new Ingrediente();
+    List<Ingrediente> todosIngredientes = new ArrayList<>();
 
     @Autowired
-    CategoriaService categoriaService;
+    IngredienteService ingredienteService;
 
     public void consultar() {
-        this.todasCategorias = categoriaService.findAll();
+        this.todosIngredientes = ingredienteService.findAll();
 
     }
 
     public void remover(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.remove(id);
+        ingredienteService.remove(id);
         consultar();
         context.addMessage(null, new FacesMessage(
-                "Categoria removida com sucesso!"));
+                "Ingrediente removido com sucesso!"));
 
     }
 
-    public String editar(Categoria categoria) {
+    public String editar(Ingrediente ingrediente) {
 
-        this.categoria = categoria;
-        return "CadastraCategoria.xhtml";
+        this.ingrediente = ingrediente;
+        return "CadastraIngrediente.xhtml";
 
     }
 
     public void salvar() {
 
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.save(this.categoria);
-        this.categoria = new Categoria();
+        ingredienteService.save(this.ingrediente);
+        this.ingrediente = new Ingrediente();
         context.addMessage(null, new FacesMessage(
-                "Categoria cadastrada com sucesso!"));
+                "Ingrediente cadastrado com sucesso!"));
 
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Ingrediente getIngrediente() {
+        return ingrediente;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
-    public List<Categoria> getTodasCategorias() {
-        return todasCategorias;
+    public List<Ingrediente> getTodosIngredientes() {
+        return todosIngredientes;
     }
 
 }

@@ -20,7 +20,6 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import pos.java.pizzaria.model.Categoria;
 import pos.java.pizzaria.model.Ingrediente;
@@ -34,14 +33,14 @@ import pos.java.pizzaria.service.ProdutoService;
  * @author leonam
  */
 @ManagedBean
-@ViewScoped
-public class CadastraProdutoBean implements Serializable {
+public class ProdutoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     Produto produto = new Produto();
     List<Categoria> todasCategorias;
     List<Ingrediente> todosIngredientes;
+    List<Produto> todosProdutos;
 
     @Autowired
     ProdutoService produtoService;
@@ -50,6 +49,10 @@ public class CadastraProdutoBean implements Serializable {
     @Autowired
     IngredienteService ingredienteService;
 
+    public void consultar(){
+        this.todosProdutos = produtoService.findAll();
+        
+    }
     public void prepararCadastro() {
         this.todasCategorias = categoriaService.findAll();
         this.todosIngredientes = ingredienteService.findAll();
@@ -78,5 +81,11 @@ public class CadastraProdutoBean implements Serializable {
     public List<Ingrediente> getTodosIngredientes() {
         return todosIngredientes;
     }
+
+    public List<Produto> getTodosProdutos() {
+        return todosProdutos;
+    }
+    
+    
 
 }

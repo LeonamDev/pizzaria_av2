@@ -22,66 +22,77 @@ import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import pos.java.pizzaria.model.Atendente;
-import pos.java.pizzaria.model.Categoria;
-import pos.java.pizzaria.service.CategoriaService;
+import pos.java.pizzaria.model.Cliente;
+import pos.java.pizzaria.model.Endereco;
+import pos.java.pizzaria.service.ClienteService;
+import pos.java.pizzaria.service.EnderecoService;
 
 /**
  *
  * @author leonam
  */
 @ManagedBean
-public class CategoriaBean implements Serializable {
+public class EnderecoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    Categoria categoria = new Categoria();
-    List<Categoria> todasCategorias = new ArrayList<>();
+    private Endereco endereco = new Endereco();
+    private List<Endereco> todosEnderecos = new ArrayList<>();
+    private List<Cliente> todosClientes = new ArrayList<>();
 
     @Autowired
-    CategoriaService categoriaService;
+    EnderecoService enderecoService;
+    @Autowired
+    ClienteService clienteService;
+
+    public void prepararCadastro() {
+        this.todosClientes = clienteService.findAll();
+    }
 
     public void consultar() {
-        this.todasCategorias = categoriaService.findAll();
+        this.todosEnderecos = enderecoService.findAll();
 
     }
 
     public void remover(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.remove(id);
+        enderecoService.remove(id);
         consultar();
         context.addMessage(null, new FacesMessage(
-                "Categoria removida com sucesso!"));
+                "Endereco removido com sucesso!"));
 
     }
 
-    public String editar(Categoria categoria) {
-
-        this.categoria = categoria;
-        return "CadastraCategoria.xhtml";
+    public String editar(Endereco endereco) {
+        this.endereco = endereco;
+        return "Cadastraendereco.xhtml";
 
     }
 
     public void salvar() {
 
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.save(this.categoria);
-        this.categoria = new Categoria();
+        enderecoService.save(this.endereco);
+        this.endereco = new Endereco();
         context.addMessage(null, new FacesMessage(
-                "Categoria cadastrada com sucesso!"));
+                "Endereco cadastrado com sucesso!"));
 
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-    public List<Categoria> getTodasCategorias() {
-        return todasCategorias;
+    public List<Endereco> getTodosEnderecos() {
+        return todosEnderecos;
+    }
+
+    public List<Cliente> getTodosClientes() {
+        return todosClientes;
     }
 
 }

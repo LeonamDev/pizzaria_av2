@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.service.MotoboyService;
 
@@ -28,7 +29,7 @@ import pos.java.pizzaria.service.MotoboyService;
  *
  * @author leonam
  */
-@FacesConverter(forClass = Motoboy.class)
+@Component
 public class MotoboyConverter implements Converter {
 
     @Autowired
@@ -44,7 +45,7 @@ public class MotoboyConverter implements Converter {
             retorno = motoboyService.findById(new Long(value));
 
         }
-        return retorno;
+        return retorno.orElse(null);
     }
 
     @Override

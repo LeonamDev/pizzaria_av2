@@ -29,6 +29,26 @@ and open the template in the editor.
                 </h:column>
                 <h:column>
                     <f:facet name="header">
+                        <h:outputText value="Registro"/>
+                    </f:facet>
+                    <h:outputText value="#{motoboy.registro}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Login"/>
+                    </f:facet>
+                    <h:outputText value="#{motoboy.login}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Senha"/>
+                    </f:facet>
+                    <h:outputText value="#{motoboy.senha}">
+                                  <f:converter converterId="PasswordConverter" />
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
                         <h:outputText value="Placa da Moto"/>
                     </f:facet>
                     <h:outputText value="#{motoboy.moto_placa}"/>

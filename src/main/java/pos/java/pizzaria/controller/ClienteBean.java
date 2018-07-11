@@ -22,66 +22,65 @@ import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import pos.java.pizzaria.model.Atendente;
-import pos.java.pizzaria.model.Categoria;
-import pos.java.pizzaria.service.CategoriaService;
+import pos.java.pizzaria.model.Cliente;
+import pos.java.pizzaria.model.Ingrediente;
+import pos.java.pizzaria.service.ClienteService;
 
 /**
  *
  * @author leonam
  */
 @ManagedBean
-public class CategoriaBean implements Serializable {
+public class ClienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    Categoria categoria = new Categoria();
-    List<Categoria> todasCategorias = new ArrayList<>();
+    Cliente cliente = new Cliente();
+    List<Cliente> todosClientes = new ArrayList<>();
 
     @Autowired
-    CategoriaService categoriaService;
+    ClienteService clienteService;
 
     public void consultar() {
-        this.todasCategorias = categoriaService.findAll();
+        this.todosClientes = clienteService.findAll();
 
     }
 
     public void remover(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.remove(id);
+        clienteService.remove(id);
         consultar();
         context.addMessage(null, new FacesMessage(
-                "Categoria removida com sucesso!"));
+                "Cliente removido com sucesso!"));
 
     }
 
-    public String editar(Categoria categoria) {
-
-        this.categoria = categoria;
-        return "CadastraCategoria.xhtml";
+    public String editar(Cliente cliente) {
+        this.cliente = cliente;
+        return "CadastraCliente.xhtml";
 
     }
 
     public void salvar() {
 
         FacesContext context = FacesContext.getCurrentInstance();
-        categoriaService.save(this.categoria);
-        this.categoria = new Categoria();
+        clienteService.save(this.cliente);
+        this.cliente = new Cliente();
         context.addMessage(null, new FacesMessage(
-                "Categoria cadastrada com sucesso!"));
+                "Cliente cadastrado com sucesso!"));
 
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public List<Categoria> getTodasCategorias() {
-        return todasCategorias;
+    public List<Cliente> getTodosClientes() {
+        return todosClientes;
     }
 
 }

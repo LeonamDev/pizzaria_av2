@@ -22,6 +22,20 @@ and open the template in the editor.
                 <h:inputText size="12"
                              value="#{atendenteBean.atendente.nome}"
                              label="Nome" />
+                <h:outputLabel value="Registro" />
+                <h:inputText size="12"
+                             value="#{atendenteBean.atendente.registro}"
+                             label="Registro" />
+                <h:outputLabel value="Login" />
+                <h:inputText size="12"
+                             value="#{atendenteBean.atendente.login}"
+                             label="Login" />
+                <h:outputLabel value="Senha" />
+                <h:inputText size="12"
+                             value="#{atendenteBean.atendente.senha}"
+                             label="Senha" >
+                    <f:converter converterId="PasswordConverter" />
+                </h:inputText>
 
                 <h:outputLabel value="Ramal" />
                 <h:inputText size="12"

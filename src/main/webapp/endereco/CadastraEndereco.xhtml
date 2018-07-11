@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewAction action="#{enderecoBean.prepararCadastro}" />
+    </f:metadata>
+    <ui:define name="titulo">Cadastro de endereco</ui:define>
+    <ui:define name="corpo">
+        <h1>Cadastro de endereco</h1>
+        <h:form id="frm">
+            <h:messages showDetail="false" showSummary="true" />
+            <h:panelGrid columns="2">  
+                <h:outputLabel value="Cliente" />
+                <h:selectOneMenu
+                    value="#{enderecoBean.endereco.cliente}" converter="#{clienteConverter}"
+                    label="Cliente">
+                    <f:selectItem
+                        itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems
+                        value="#{enderecoBean.todosClientes}"
+                        var="cliente" itemValue="#{cliente}"
+                        itemLabel="#{cliente.nome}" />
+                </h:selectOneMenu>
+                <h:outputLabel value="Rua" />
+                <h:inputText size="12"
+                             value="#{enderecoBean.endereco.rua}"
+                             label="Rua" />
+                <h:outputLabel value="Numero" />
+                <h:inputText size="12"
+                             value="#{enderecoBean.endereco.numero}"
+                             label="Numero" />
+                <h:outputLabel value="Referencia" />
+                <h:inputText size="12"
+                             value="#{enderecoBean.endereco.referencia}"
+                             label="Referencia" />
+
+                <h:commandButton value="Salvar"
+                                 action="#{enderecoBean.salvar}" />
+            </h:panelGrid>
+        </h:form>   
+    </ui:define>
+</ui:composition>

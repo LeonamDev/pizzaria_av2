@@ -37,4 +37,13 @@ public class EnderecoService implements Serializable {
 
     }
 
+    public void save(Endereco endereco) {
+        enderecoRepository.save(endereco);
+
+    }
+
+    public void remove(Long id) {
+        enderecoRepository.deleteById(id);
+    }
+
 }

@@ -37,4 +37,13 @@ public class ClienteService implements Serializable {
 
     }
 
+    public void save(Cliente cliente) {
+        clienteRepository.save(cliente);
+
+    }
+
+    public void remove(Long id) {
+        clienteRepository.deleteById(id);
+    }
+
 }

@@ -20,13 +20,13 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import pos.java.pizzaria.model.Atendente;
 import pos.java.pizzaria.model.Cliente;
 import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.model.Pedido;
 import pos.java.pizzaria.model.Produto;
+import pos.java.pizzaria.model.ProdutoPedido;
 import pos.java.pizzaria.model.TipoStatus;
 import pos.java.pizzaria.service.AtendenteService;
 import pos.java.pizzaria.service.ClienteService;
@@ -39,8 +39,7 @@ import pos.java.pizzaria.service.ProdutoService;
  * @author leonam
  */
 @ManagedBean
-@ViewScoped
-public class CadastraPedidoBean implements Serializable {
+public class PedidoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -60,11 +59,12 @@ public class CadastraPedidoBean implements Serializable {
     private MotoboyService motoboyService;
     @Autowired
     private ProdutoService produtoService;
+    @Autowired
 
     public void prepararCadastro() {
 
         this.todosClientes = clienteService.findAll();
-        //  this.todosAtendentes = atendenteService.findAll();
+        this.todosAtendentes = atendenteService.findAll();
         this.todosMotoboys = motoboyService.findAll();
         this.todosProdutos = produtoService.findAll();
 

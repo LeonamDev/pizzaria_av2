@@ -12,7 +12,7 @@ and open the template in the editor.
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:metadata>
-        <f:viewAction action="#{cadastraPedidoBean.prepararCadastro}" />
+        <f:viewAction action="#{pedidoBean.prepararCadastro}" />
     </f:metadata>
     <ui:define name="titulo">Cadastro de Pedido</ui:define>
     <ui:define name="corpo">
@@ -22,85 +22,90 @@ and open the template in the editor.
             <h:panelGrid columns="2">
                 <h:outputLabel value="Cliente" />
                 <h:selectOneMenu
-                    value="#{cadastraPedidoBean.pedido.cliente}"
+                    value="#{pedidoBean.pedido.cliente}"  converter="#{clienteConverter}"
                     label="Cliente">
                     <f:selectItem
                         itemLabel="Selecione" noSelectionOption="true" />
                     <f:selectItems
-                        value="#{cadastraPedidoBean.todosClientes}"
+                        value="#{pedidoBean.todosClientes}"
                         var="cliente" itemValue="#{cliente}"
                         itemLabel="#{cliente.nome}" />
                 </h:selectOneMenu>
                 <h:outputLabel value="Atendente" />
                 <h:selectOneMenu
-                    value="#{cadastraPedidoBean.pedido.atendente}"
+                    value="#{pedidoBean.pedido.atendente}"  converter="#{atendenteConverter}"
                     label="Atendente">
                     <f:selectItem
                         itemLabel="Selecione" noSelectionOption="true" />
                     <f:selectItems
-                        value="#{cadastraPedidoBean.todosAtendentes}"
-                        var="cliente" itemValue="#{atendente}"
+                        value="#{pedidoBean.todosAtendentes}"
+                        var="atendente" itemValue="#{atendente}"
                         itemLabel="#{atendente.nome}" />
                 </h:selectOneMenu>
                 <h:outputLabel value="Entregador" />
                 <h:selectOneMenu
-                    value="#{cadastraPedidoBean.pedido.entregador}"
+                    value="#{pedidoBean.pedido.entregador}"  converter="#{motoboyConverter}"
                     label="Entregador">
                     <f:selectItem
                         itemLabel="Selecione" noSelectionOption="true" />
                     <f:selectItems
-                        value="#{cadastraPedidoBean.todosMotoboys}"
+                        value="#{pedidoBean.todosMotoboys}"
                         var="motoboy" itemValue="#{motoboy}"
                         itemLabel="#{motoboy.nome}" />
                 </h:selectOneMenu>
-                  <h:outputLabel value="Status" />
+                <h:outputLabel value="Status" />
                 <h:selectOneRadio
-                    value="#{cadastraPedidoBean.pedido.status}"
+                    value="#{pedidoBean.pedido.status}"
                     label="Status do pedido">
                     <f:selectItems
-                        value="#{cadastraPedidoBean.tiposStatus}"
+                        value="#{pedidoBean.tiposStatus}"
                         var="tipoStatus"
                         itemValue="#{tipoStatus}" />
                 </h:selectOneRadio>
-                 <h:outputLabel value="Produtos" />
-                  <h:selectManyCheckbox value="#{cadastraPedidoBean.pedido.produtoPedidos}">
-                      <f:selectItems
-                        value="#{cadastraPedidoBean.todosProdutos}"
+                <h:outputLabel value="Produtos" />
+                <h:selectManyCheckbox value="#{pedidoBean.pedido.produtoPedidos}">
+                    <f:selectItems
+                        value="#{pedidoBean.todosProdutos}"
                         var="produto"
                         itemValue="#{produto}" 
                         itemLabel="#{produto.nome}"/>
-                  </h:selectManyCheckbox>
+                </h:selectManyCheckbox>
+                <h:outputLabel value="Entrega" />
+                <h:selectOneMenu value = "#{pedidoBean.pedido.entrega}"> 
+                    <f:selectItem itemValue = "1" itemLabel = "Sim" /> 
+                    <f:selectItem itemValue = "0" itemLabel = "Não" /> 
+                </h:selectOneMenu> 
                 <h:outputLabel value="Valor" />
-                    <h:inputText size="12"
-                                 value="#{cadastraPedidoBean.pedido.valor}"
-                                 label="Valor">
-                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
-                                         minFractionDigits="2" />
-                    </h:inputText>
+                <h:inputText size="12"
+                             value="#{pedidoBean.pedido.valor}"
+                             label="Valor">
+                    <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                     minFractionDigits="2" />
+                </h:inputText>
                 <h:outputLabel value="Desconto" />
-                        <h:inputText size="12"
-                                     value="#{cadastraPedidoBean.pedido.desconto}"
-                                     label="Valor">
-                            <f:convertNumber locale="pt_BR" maxFractionDigits="2"
-                                             minFractionDigits="2" />
-                        </h:inputText>
+                <h:inputText size="12"
+                             value="#{pedidoBean.pedido.desconto}"
+                             label="Valor">
+                    <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                     minFractionDigits="2" />
+                </h:inputText>
                 <h:outputLabel value="Taxa de Entrega" />
-                    <h:inputText size="12"
-                                 value="#{cadastraPedidoBean.pedido.taxa_entrega}"
-                                 label="Valor">
-                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
-                                         minFractionDigits="2" />
-                    </h:inputText>                   
+                <h:inputText size="12"
+                             value="#{pedidoBean.pedido.taxa_entrega}"
+                             label="Valor">
+                    <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                     minFractionDigits="2" />
+                </h:inputText>                   
                 <h:outputLabel value="Troco" />
-                    <h:inputText size="12"
-                                 value="#{cadastraPedidoBean.pedido.troco}"
-                                 label="Valor">
-                        <f:convertNumber locale="pt_BR" maxFractionDigits="2"
-                                         minFractionDigits="2" />
-                    </h:inputText>
+                <h:inputText size="12"
+                             value="#{pedidoBean.pedido.troco}"
+                             label="Valor">
+                    <f:convertNumber locale="pt_BR" maxFractionDigits="2"
+                                     minFractionDigits="2" />
+                </h:inputText>
 
                 <h:commandButton value="Salvar"
-                                 action="#{cadastraPedidoBean.salvar}" />
+                                 action="#{pedidoBean.salvar}" />
             </h:panelGrid>
         </h:form>   
     </ui:define>
