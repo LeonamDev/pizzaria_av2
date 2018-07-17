@@ -21,13 +21,13 @@ import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import pos.java.pizzaria.enums.FormaPagamento;
 import pos.java.pizzaria.model.Atendente;
 import pos.java.pizzaria.model.Cliente;
 import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.model.Pedido;
 import pos.java.pizzaria.model.Produto;
-import pos.java.pizzaria.model.ProdutoPedido;
-import pos.java.pizzaria.model.TipoStatus;
+import pos.java.pizzaria.enums.TipoStatus;
 import pos.java.pizzaria.service.AtendenteService;
 import pos.java.pizzaria.service.ClienteService;
 import pos.java.pizzaria.service.MotoboyService;
@@ -162,6 +162,9 @@ public class PedidoBean implements Serializable {
 
     public TipoStatus[] getTiposStatus() {
         return TipoStatus.values();
+    }
+    public FormaPagamento[] getFormaPagamento() {
+        return FormaPagamento.values();
     }
 
 }

@@ -13,14 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pos.java.pizzaria.model;
+package pos.java.pizzaria.enums;
 
 /**
  *
  * @author leonam
  */
-public enum TipoStatus {
+public enum FormaPagamento {
 
-    PREPARANDO, SAIU_PARA_ENTREGA, ENTREGUE;
+    DINHEIRO(0), CARTAO_DE_DEBITO(1), CARTAO_DE_CREDITO(2), VALE_REFEICAO(3);
+
+    public int id;
+
+    FormaPagamento(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
 }
