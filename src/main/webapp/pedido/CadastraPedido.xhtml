@@ -17,10 +17,9 @@ and open the template in the editor.
     <ui:define name="titulo">Cadastro de Pedido</ui:define>
     <ui:define name="corpo">
         <h1>Cadastro de pedido</h1>
-        <h:form id="frm">
-            <h:messages showDetail="false" showSummary="true" />
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Cliente" />
+         <h:form>
+              <h:panelGrid columns="2">
+                      <h:outputLabel value="Cliente" />
                 <h:selectOneMenu
                     value="#{pedidoBean.pedido.cliente}"  converter="#{clienteConverter}"
                     label="Cliente">
@@ -30,6 +29,37 @@ and open the template in the editor.
                         value="#{pedidoBean.todosClientes}"
                         var="cliente" itemValue="#{cliente}"
                         itemLabel="#{cliente.nome}" />
+                </h:selectOneMenu>
+                    <h:outputLabel value="Produto" />
+                        <h:selectOneMenu
+                            value="#{pedidoBean.produto}"  converter="#{produtoConverter}"
+                            label="Produto">
+                            <f:selectItem
+                                itemLabel="Selecione" noSelectionOption="true" />
+                            <f:selectItems
+                                value="#{pedidoBean.todosProdutos}"
+                                var="produto" itemValue="#{produto}"
+                                itemLabel="#{produto.nome}" />
+                        </h:selectOneMenu>
+
+                    <h:commandButton value="ADD"
+                                         action="#{pedidoBean.addProdutoPedido}" />
+              </h:panelGrid>
+                </h:form>
+        <br></br>
+        <h:form id="frm">
+            <h:messages showDetail="false" showSummary="true" />
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Endereco" />
+                <h:selectOneMenu
+                    value="#{pedidoBean.pedido.endereco}"  converter="#{enderecoConverter}"
+                    label="Endereco">
+                    <f:selectItem
+                        itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems
+                        value="#{pedidoBean.clienteEnderecos}"
+                        var="endereco" itemValue="#{endereco}"
+                        itemLabel="#{endereco.rua} #{endereco.numero}" />
                 </h:selectOneMenu>
                 <h:outputLabel value="Atendente" />
                 <h:selectOneMenu
@@ -74,13 +104,17 @@ and open the template in the editor.
                          />
                 </h:selectOneMenu>
                 <h:outputLabel value="Produtos" />
-                <h:selectManyCheckbox value="#{pedidoBean.pedido.produtoPedidos}">
-                    <f:selectItems
-                        value="#{pedidoBean.todosProdutos}"
-                        var="produto"
-                        itemValue="#{produto}" 
-                        itemLabel="#{produto.nome}"/>
-                </h:selectManyCheckbox>
+                <table>
+                        <ui:repeat var="p" value="#{pedidoBean.produtoPedido}" varStatus="pedido">
+
+                            <tr>     <td>#{p.produto.nome}</td> 
+                                     <td>#{p.quantidade}</td>
+                                     <td>#{p.obs}</td>
+                             </tr>
+
+                        </ui:repeat>
+
+                     </table>
                 <h:outputLabel value="Entrega" />
                 <h:selectOneMenu value = "#{pedidoBean.pedido.entrega}"> 
                     <f:selectItem itemValue = "1" itemLabel = "Sim" /> 

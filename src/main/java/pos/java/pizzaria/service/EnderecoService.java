@@ -46,4 +46,8 @@ public class EnderecoService implements Serializable {
         enderecoRepository.deleteById(id);
     }
 
+    public List<Endereco> findEnderecoByCliente(Long id) {
+        return enderecoRepository.findByCliente(id);
+    }
+
 }

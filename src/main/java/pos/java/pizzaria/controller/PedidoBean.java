@@ -16,6 +16,7 @@
 package pos.java.pizzaria.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
@@ -28,8 +29,11 @@ import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.model.Pedido;
 import pos.java.pizzaria.model.Produto;
 import pos.java.pizzaria.enums.TipoStatus;
+import pos.java.pizzaria.model.Endereco;
+import pos.java.pizzaria.model.ProdutoPedido;
 import pos.java.pizzaria.service.AtendenteService;
 import pos.java.pizzaria.service.ClienteService;
+import pos.java.pizzaria.service.EnderecoService;
 import pos.java.pizzaria.service.MotoboyService;
 import pos.java.pizzaria.service.PedidoService;
 import pos.java.pizzaria.service.ProdutoService;
@@ -48,6 +52,13 @@ public class PedidoBean implements Serializable {
     private List<Atendente> todosAtendentes;
     private List<Motoboy> todosMotoboys;
     private List<Produto> todosProdutos;
+    private List<Endereco> clienteEnderecos;
+    private List<ProdutoPedido> produtoPedido = new ArrayList<>();
+    private List<Pedido> pedidos = new ArrayList<>();
+
+    private Produto produto = new Produto();
+    private ProdutoPedido pp = new ProdutoPedido();
+    private String nome;
 
     @Autowired
     private PedidoService pedidoService;
@@ -60,6 +71,17 @@ public class PedidoBean implements Serializable {
     @Autowired
     private ProdutoService produtoService;
     @Autowired
+    private EnderecoService enderecoService;
+
+    public void consultar() {
+        this.pedidos = pedidoService.findAll();
+    }
+
+    public void consultarPeloNomeDoCliente() {
+        this.pedidos.clear();
+        this.pedidos = pedidoService.findByClienteNome(this.nome);
+
+    }
 
     public void prepararCadastro() {
 
@@ -70,14 +92,51 @@ public class PedidoBean implements Serializable {
 
     }
 
+    public void addProdutoPedido() {
+        setClienteEnderecos();
+        this.pp.setProduto(this.produto);
+        this.pp.setObs("ads");
+        this.pp.setQuantidade(5);
+
+        this.produtoPedido.add(this.pp);
+        this.produto = new Produto();
+        this.pp = new ProdutoPedido();
+
+    }
+
+    public void setClienteEnderecos() {
+
+        this.clienteEnderecos = enderecoService.findEnderecoByCliente(this.pedido.getCliente().getId());
+    }
+
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
         this.pedido.setData(new java.sql.Date(System.currentTimeMillis()));
         this.pedido.setHora(new java.sql.Timestamp(System.currentTimeMillis()));
+
+        for (ProdutoPedido pedido : this.produtoPedido) {
+            pedido.setPedido(this.pedido);
+            this.pedido.getProdutoPedidos().add(pedido);
+        }
         pedidoService.save(this.pedido);
+        this.produto = new Produto();
+        this.produtoPedido.clear();
         this.pedido = new Pedido();
         context.addMessage(null, new FacesMessage(
                 "Pedido cadastrado com sucesso!"));
+    }
+
+    public String editar(Pedido pedido) {
+        this.pedido = pedido;
+        return "CadastraPedido.xhtml";
+    }
+
+    public void remover(Long id) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        pedidoService.remove(id);
+        consultar();
+        context.addMessage(null, new FacesMessage(
+                "Pedido removido com sucesso!"));
     }
 
     public Pedido getPedido() {
@@ -163,8 +222,49 @@ public class PedidoBean implements Serializable {
     public TipoStatus[] getTiposStatus() {
         return TipoStatus.values();
     }
+
     public FormaPagamento[] getFormaPagamento() {
         return FormaPagamento.values();
+    }
+
+    public List<Endereco> getClienteEnderecos() {
+        return clienteEnderecos;
+    }
+
+    public void setClienteEnderecos(List<Endereco> clienteEnderecos) {
+        this.clienteEnderecos = clienteEnderecos;
+    }
+
+    public List<ProdutoPedido> getProdutoPedido() {
+        return produtoPedido;
+    }
+
+    public void setProdutoPedido(List<ProdutoPedido> produtoPedido) {
+        this.produtoPedido = produtoPedido;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
 }

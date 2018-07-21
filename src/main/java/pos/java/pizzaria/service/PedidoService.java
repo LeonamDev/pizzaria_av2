@@ -39,4 +39,12 @@ public class PedidoService implements Serializable {
         pedidoRepository.save(pedido);
     }
 
+    public void remove(Long id) {
+        pedidoRepository.deleteById(id);
+    }
+
+    public List<Pedido> findByClienteNome(String nome) {
+        return pedidoRepository.findByClienteNome(nome);
+    }
+
 }

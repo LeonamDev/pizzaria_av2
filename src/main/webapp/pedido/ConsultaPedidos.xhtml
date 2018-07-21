@@ -11,13 +11,23 @@ and open the template in the editor.
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:metadata>
-        <f:viewAction action="#{consultaPedidosBean.consultar}" />
+        <f:viewAction action="#{pedidoBean.consultar}" />
     </f:metadata>
     <ui:define name="titulo">Consulta de Pedidos</ui:define>
     <ui:define name="corpo">
         <h1>Consulta de pedidos</h1>
+        <h:form id="busca">
+            <h:outputLabel value="Consulta por nome do cliente: " />
+            <h:inputText size="12"
+                         value="#{pedidoBean.nome}"
+                         label="Nome">
+
+            </h:inputText>
+            <h:commandButton value="Buscar"
+                             action="#{pedidoBean.consultarPeloNomeDoCliente}" />
+        </h:form><br></br><br></br>
         <h:form id="frm">
-            <h:dataTable value="#{consultaPedidosBean.pedidos}"
+            <h:dataTable value="#{pedidoBean.pedidos}"
                          var="pedido" border="1" cellspacing="0"
                          cellpadding="2">
                 <h:column>
@@ -68,7 +78,7 @@ and open the template in the editor.
                     </f:facet>
                     <h:outputText value="#{pedido.taxa_entrega}"/>
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">
                         <h:outputText value="Desconto"/>
                     </f:facet>
@@ -80,16 +90,16 @@ and open the template in the editor.
                     </f:facet>
                     <h:outputText value="#{pedido.troco}"/>
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Produto(s)"/>
                     </f:facet>
                     <ui:repeat value="#{pedido.produtoPedidos}" var="produtoPedido">
-                    <h:outputText value="#{produtoPedido.produto.nome} - #{produtoPedido.quantidade} - #{produtoPedido.obs}"/><br/>
+                        <h:outputText value="#{produtoPedido.produto.nome} - #{produtoPedido.quantidade} - #{produtoPedido.obs}"/><br/>
                     </ui:repeat>
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Valor"/>
@@ -101,6 +111,15 @@ and open the template in the editor.
                         <h:outputText value="Endereco Entrega"/>
                     </f:facet>
                     <h:outputText value="#{pedido.endereco.rua}-#{ pedido.endereco.numero}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Ações"/>
+                    </f:facet>
+                    <h:commandButton value="Editar"
+                                     action="#{pedidoBean.editar(pedido)}" />
+                    <h:commandButton value="Remover"
+                                     action="#{pedidoBean.remover(pedido.id)}" />
                 </h:column>
             </h:dataTable>
         </h:form>
