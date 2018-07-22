@@ -37,4 +37,13 @@ public class GerenteService implements Serializable {
 
     }
 
+    public void save(Gerente gerente) {
+        gerenteRepository.save(gerente);
+
+    }
+
+    public void remove(Long id) {
+        gerenteRepository.deleteById(id);
+    }
+
 }

@@ -21,8 +21,8 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.service.MotoboyService;
 
@@ -38,7 +38,6 @@ public class MotoboyBean implements Serializable {
 
     @Autowired
     MotoboyService motoboyService;
-    
 
     public void consultar() {
         this.todosMotoboys = motoboyService.findAll();
@@ -60,6 +59,7 @@ public class MotoboyBean implements Serializable {
 
     public void salvar() {
         FacesContext context = FacesContext.getCurrentInstance();
+        this.motoboy.setSenha(new BCryptPasswordEncoder().encode(this.motoboy.getSenha()));
         motoboyService.save(this.motoboy);
         this.motoboy = new Motoboy();
         context.addMessage(null, new FacesMessage(

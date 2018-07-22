@@ -23,71 +23,71 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import pos.java.pizzaria.model.Atendente;
+import pos.java.pizzaria.model.Gerente;
 import pos.java.pizzaria.model.Role;
 import pos.java.pizzaria.repository.RoleRepository;
-import pos.java.pizzaria.service.AtendenteService;
+import pos.java.pizzaria.service.GerenteService;
 
 /**
  *
  * @author leonam
  */
 @ManagedBean
-public class AtendenteBean implements Serializable {
-    
+public class GerenteBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
-    Atendente atendente = new Atendente();
-    List<Atendente> todosAtendentes = new ArrayList<>();
-    
+
+    Gerente gerente = new Gerente();
+    List<Gerente> todosGerentes = new ArrayList<>();
+
     @Autowired
-    AtendenteService atendenteService;
+    GerenteService gerenteService;
     @Autowired
     RoleRepository roleRepository;
-    
+
     public void consultar() {
-        this.todosAtendentes = atendenteService.findAll();
-        
+        this.todosGerentes = gerenteService.findAll();
+
     }
-    
+
     public void remover(Long id) {
         FacesContext context = FacesContext.getCurrentInstance();
-        atendenteService.remove(id);
+        gerenteService.remove(id);
         consultar();
         context.addMessage(null, new FacesMessage(
-                "Atendente removido com sucesso!"));
-        
+                "Gerente removido com sucesso!"));
+
     }
-    
-    public String editar(Atendente atendente) {
-        
-        this.atendente = atendente;
-        return "CadastraAtendente.xhtml";
-        
+
+    public String editar(Gerente gerente) {
+
+        this.gerente = gerente;
+        return "CadastraGerente.xhtml";
+
     }
-    
+
     public void salvar() {
-        Role atendenteRole = roleRepository.findByRoleNome("ROLE_ATENDENTE");
-        
+        Role atendenteRole = roleRepository.findByRoleNome("ROLE_GERENTE");
+
         FacesContext context = FacesContext.getCurrentInstance();
-        this.atendente.getRoles().add(atendenteRole);
-        atendenteService.save(this.atendente);
-        this.atendente = new Atendente();
+        this.gerente.getRoles().add(atendenteRole);
+        gerenteService.save(this.gerente);
+        this.gerente = new Gerente();
         context.addMessage(null, new FacesMessage(
-                "Atendente cadastrado com sucesso!"));
-        
+                "Gerente cadastrado com sucesso!"));
+
     }
-    
-    public List<Atendente> getTodosAtendentes() {
-        return todosAtendentes;
+
+    public Gerente getGerente() {
+        return gerente;
     }
-    
-    public Atendente getAtendente() {
-        return atendente;
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
-    
-    public void setAtendente(Atendente atendente) {
-        this.atendente = atendente;
+
+    public List<Gerente> getTodosGerentes() {
+        return todosGerentes;
     }
-    
+
 }

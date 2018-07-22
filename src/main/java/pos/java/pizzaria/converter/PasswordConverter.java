@@ -19,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -30,10 +31,10 @@ public class PasswordConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext context,
             UIComponent component, String value) {
-        char[] senha = {};
+        Object senha = null;
         if (value != null && !"".equals(value)) {
 
-            senha = value.toCharArray();
+            senha = new BCryptPasswordEncoder().encode(value);
         }
 
         return senha;
@@ -44,7 +45,8 @@ public class PasswordConverter implements Converter {
             UIComponent component, Object value) {
         String senha = "";
         if (value != null) {
-            senha = value.toString();
+
+            senha = new BCryptPasswordEncoder().encode(value.toString());
         }
 
         return senha;
