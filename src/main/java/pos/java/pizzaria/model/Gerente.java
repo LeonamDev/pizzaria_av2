@@ -19,4 +19,12 @@ public class Gerente extends Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Gerente() {
+
+    }
+
+    public Gerente(int registro, String login, String senha, String nome) {
+        super(registro, login, senha, nome);
+    }
+
 }

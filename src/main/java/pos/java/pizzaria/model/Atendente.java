@@ -25,14 +25,14 @@ public class Atendente extends Funcionario implements Serializable {
     private int ramal;
 
     @OneToMany(mappedBy = "atendente")
-     private List<Pedido> pedidos = new ArrayList<>();
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Atendente() {
 
     }
 
-    public Atendente(int ramal, int registro, String login, String nome) {
-        super(registro, login, nome);
+    public Atendente(int ramal, int registro, String login, String senha, String nome) {
+        super(registro, login, senha, nome);
         this.ramal = ramal;
     }
 
@@ -52,5 +52,4 @@ public class Atendente extends Funcionario implements Serializable {
         this.pedidos = pedidos;
     }
 
-  
 }

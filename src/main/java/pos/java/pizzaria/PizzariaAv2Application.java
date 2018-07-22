@@ -8,22 +8,27 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pos.java.pizzaria.model.Atendente;
 import pos.java.pizzaria.model.Categoria;
 import pos.java.pizzaria.model.Cliente;
 import pos.java.pizzaria.model.Endereco;
+import pos.java.pizzaria.model.Gerente;
 import pos.java.pizzaria.model.Ingrediente;
 import pos.java.pizzaria.model.Motoboy;
 import pos.java.pizzaria.model.Pedido;
 import pos.java.pizzaria.model.Produto;
 import pos.java.pizzaria.model.ProdutoPedido;
+import pos.java.pizzaria.model.Role;
 import pos.java.pizzaria.repository.AtendenteRepository;
 import pos.java.pizzaria.repository.CategoriaRepository;
 import pos.java.pizzaria.repository.ClienteRepository;
 import pos.java.pizzaria.repository.EnderecoRepository;
+import pos.java.pizzaria.repository.GerenteRepository;
 import pos.java.pizzaria.repository.MotoboyRepository;
 import pos.java.pizzaria.repository.PedidoRepository;
 import pos.java.pizzaria.repository.ProdutoRepository;
+import pos.java.pizzaria.repository.RoleRepository;
 
 @SpringBootApplication
 public class PizzariaAv2Application extends SpringBootServletInitializer implements CommandLineRunner {
@@ -37,19 +42,22 @@ public class PizzariaAv2Application extends SpringBootServletInitializer impleme
     @Autowired
     private ClienteRepository clienteRepository;
     @Autowired
+    private GerenteRepository gerenteRepository;
+    @Autowired
     private MotoboyRepository motoboyRepository;
     @Autowired
     private AtendenteRepository atendenteRepository;
     @Autowired
     private PedidoRepository pedidoRepository;
-    
+
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(PizzariaAv2Application.class);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(PizzariaAv2Application.class, args);
+        System.out.print(new BCryptPasswordEncoder().encode("123"));
 
     }
 
@@ -83,12 +91,16 @@ public class PizzariaAv2Application extends SpringBootServletInitializer impleme
         p2.getIngredientes().add(i3);
         p2.getIngredientes().add(i4);
 
-        Motoboy entregador = new Motoboy("KXZ548", 584, "AugustoEntregador", "Augusto");
-        char[] senha = {'a', 'b', 'c'};
-        entregador.setSenha(senha);
+        Role gerenteRole = new Role("ROLE_GERENTE");
+        Role atendenteRole = new Role("ROLE_ATENDENTE");
 
-        Atendente atendente = new Atendente(159, 594, "RebecaAtendente", "Rebeca");
-        atendente.setSenha(senha);
+        Gerente gerente = new Gerente(159, "RafaelGerente", new BCryptPasswordEncoder().encode("123"), "Rafael");
+        gerente.getRoles().add(gerenteRole);
+
+        Motoboy entregador = new Motoboy("KXZ548", 584, "AugustoEntregador", new BCryptPasswordEncoder().encode("123"), "Augusto");
+
+        Atendente atendente = new Atendente(159, 594, "RebecaAtendente", new BCryptPasswordEncoder().encode("123"), "Rebeca");
+        atendente.getRoles().add(atendenteRole);
 
         List<Pedido> pedidos = new ArrayList();
         Pedido pedido = new Pedido(cliente, endereco, entregador, atendente, true, 23, 5, 70, 1, 10,
@@ -113,10 +125,12 @@ public class PizzariaAv2Application extends SpringBootServletInitializer impleme
         for (Categoria categoria : categorias) {
             categoriaRepository.save(categoria);
         }
+
         clienteRepository.save(cliente);
         enderecoRepository.save(endereco);
         motoboyRepository.save(entregador);
         atendenteRepository.save(atendente);
+        gerenteRepository.save(gerente);
 
         for (Pedido pedid : pedidos) {
             pedidoRepository.save(pedid);

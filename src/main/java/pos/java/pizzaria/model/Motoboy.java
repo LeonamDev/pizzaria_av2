@@ -31,8 +31,8 @@ public class Motoboy extends Funcionario implements Serializable {
 
     }
 
-    public Motoboy(String moto_placa, int registro, String login, String nome) {
-        super(registro, login, nome);
+    public Motoboy(String moto_placa, int registro, String login, String senha, String nome) {
+        super(registro, login, senha, nome);
         this.moto_placa = moto_placa;
     }
 
