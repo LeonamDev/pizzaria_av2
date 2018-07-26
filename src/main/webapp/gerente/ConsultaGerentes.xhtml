@@ -16,6 +16,11 @@ and open the template in the editor.
     <ui:define name="titulo">Consulta de gerentes</ui:define>
     <ui:define name="corpo">
         <h1>Consulta de gerentes</h1>
+        <div>
+            <h:form>
+                <h:commandLink action = "/index?faces-redirect=true" value = "Voltar"/>
+            </h:form>
+        </div><br></br>
         <h:messages showDetail="false" showSummary="true" />
         <h:form id="frm">
             <h:dataTable value="#{gerenteBean.todosGerentes}"
@@ -57,6 +62,9 @@ and open the template in the editor.
                                      action="#{gerenteBean.remover(gerente.id)}" />
                 </h:column>
             </h:dataTable>
+        </h:form>
+        <h:form>
+            <h:commandLink action = "/gerente/CadastraGerente?faces-redirect=true" value = "Cadastrar"/>                    
         </h:form>
     </ui:define>
 </ui:composition>

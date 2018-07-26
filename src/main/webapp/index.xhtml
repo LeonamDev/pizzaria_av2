@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pizzaria</ui:define>
+    <ui:define name="corpo">
+        <h1>Escolha um item:</h1>
+        <div>
+            <ul>
+                <li><a href="/cliente/ConsultaClientes.xhtml">Clientes</a></li>
+                <li><a href="/endereco/ConsultaEnderecos.xhtml">Enderecos</a></li>
+                <li><a href="/atendente/ConsultaAtendentes.xhtml">Atendentes</a></li>
+                <li><a href="/motoboy/ConsultaMotoboys.xhtml">Motoboys</a></li>
+                <li><a href="/gerente/ConsultaGerentes.xhtml">Gerentes</a></li>
+                <li><a href="/produto/ConsultaProdutos.xhtml">Produtos</a></li>
+                <li><a href="/ingrediente/ConsultaIngredientes.xhtml">Ingredientes</a></li>
+                <li><a href="/categoria/ConsultaCategorias.xhtml">Categorias</a></li>
+                <li><a href="/pedido/ConsultaPedidos.xhtml">Pedidos</a></li>
+            </ul>
+
+            <a href="/logout">Fazer Logout</a>
+        </div><br></br>               
+    </ui:define>
+</ui:composition>

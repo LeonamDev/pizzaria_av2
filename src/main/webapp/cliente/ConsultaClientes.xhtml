@@ -16,6 +16,11 @@ and open the template in the editor.
     <ui:define name="titulo">Consulta de clientes</ui:define>
     <ui:define name="corpo">
         <h1>Consulta de clientes</h1>
+        <div>
+            <h:form>
+                <h:commandLink action = "/index?faces-redirect=true" value = "Voltar"/>
+            </h:form>
+        </div><br></br>
         <h:messages showDetail="false" showSummary="true" />
         <h:form id="frm">
             <h:dataTable value="#{clienteBean.todosClientes}"
@@ -29,7 +34,7 @@ and open the template in the editor.
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Ramal"/>
+                        <h:outputText value="Telefone"/>
                     </f:facet>
                     <h:outputText value="#{cliente.telefone}"/>
                 </h:column>
@@ -43,6 +48,9 @@ and open the template in the editor.
                                      action="#{clienteBean.remover(cliente.id)}" />
                 </h:column>
             </h:dataTable>
+        </h:form>
+        <h:form>
+            <h:commandLink action = "/cliente/CadastraCliente?faces-redirect=true" value = "Cadastrar"/>                    
         </h:form>
     </ui:define>
 </ui:composition>

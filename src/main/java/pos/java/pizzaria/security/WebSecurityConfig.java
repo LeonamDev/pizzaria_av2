@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/categoria/**").hasRole("GERENTE")
                 .antMatchers(HttpMethod.GET, "/gerente/**").hasRole("GERENTE")
                 .anyRequest().authenticated()
+                .and().exceptionHandling().accessDeniedPage("/403.xhtml")
                 .and().formLogin().permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
     }

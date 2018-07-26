@@ -16,6 +16,11 @@ and open the template in the editor.
     <ui:define name="titulo">Consulta de Produtos</ui:define>
     <ui:define name="corpo">
         <h1>Consulta de produtos</h1>
+        <div>
+            <h:form>
+                <h:commandLink action = "/index?faces-redirect=true" value = "Voltar"/>
+            </h:form>
+        </div><br></br>
         <h:form id="frm">
             <h:dataTable value="#{produtoBean.todosProdutos}"
                          var="produto" border="1" cellspacing="0"
@@ -49,10 +54,13 @@ and open the template in the editor.
                         <h:outputText value="Ingrediente(s)"/>
                     </f:facet>
                     <ui:repeat value="#{produto.ingredientes}" var="ingrediente">
-                    <h:outputText value="#{ingrediente.nome}"/><br/>
+                        <h:outputText value="#{ingrediente.nome}"/><br/>
                     </ui:repeat>
                 </h:column> 
             </h:dataTable>
+        </h:form>
+        <h:form>
+            <h:commandLink action = "/produto/CadastraProduto?faces-redirect=true" value = "Cadastrar"/>                    
         </h:form>
     </ui:define>
 </ui:composition>
